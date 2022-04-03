@@ -1,5 +1,5 @@
 """
-This is a hello world add-on for DocumentCloud.
+This is a Average Page Count add-on for DocumentCloud.
 
 It demonstrates how to write a add-on which can be activated from the
 DocumentCloud add-on system and run using Github Actions.  It receives data
@@ -8,34 +8,32 @@ DocumentCloud using the standard API
 """
 
 from documentcloud.addon import AddOn
+from addon import AddOn
+import csv
 
 
-class HelloWorld(AddOn):
+class AvgPageCount(AddOn):
     """An example Add-On for DocumentCloud."""
 
     def main(self):
-        """The main add-on functionality goes here."""
         # fetch your add-on specific data
-        name = self.data.get("name", "world")
+        if not self.documents:
+            self.set_message("Please select at least one document")
+            return
 
-        self.set_message("Hello World start!")
-
-        # add a hello note to the first page of each selected document
-        if self.documents:
+        with open("average_page_count.txt", "w+") as file_:
             for document in self.client.documents.list(id__in=self.documents):
-                document.annotations.create(f"Hello {name}!", 0)
-        elif self.query:
-            documents = self.client.documents.search(self.query)[:3]
-            for document in documents:
-                document.annotations.create(f"Hello {name}!", 0)
 
-        with open("hello.txt", "w+") as file_:
-            file_.write("Hello world!")
+                page_total = + document.page()
+            num_docs = self.documents.count()
+            avg_page = round(page_total/num_docs)
+
+            file_.write("Average page number for " + num_docs +
+                        "documents is: " + avg_page)
             self.upload_file(file_)
 
-        self.set_message("Hello World end!")
-        self.send_mail("Hello World!", "We finished!")
+        self.set_message("Average Page Count end!")
 
 
 if __name__ == "__main__":
-    HelloWorld().main()
+    AvgPageCount().main()
