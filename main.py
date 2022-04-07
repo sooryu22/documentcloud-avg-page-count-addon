@@ -18,11 +18,15 @@ class AvgPageCount(AddOn):
     def main(self):
 
         documents = self.data.get("documents")
+
+        if not documents:
+            sys.exit("Please select at least one document")
+
         for document in documents:
             try:
                 int(document)
             except:
-                sys.exit("Please only input an integer")
+                sys.exit("Please only provide an integer")
 
         doc_objects = [0]*len(documents)
         doc_selected = len(documents)
