@@ -24,7 +24,6 @@ class AvgPageCount(AddOn):
         for i in range(doc_selected):
             doc_objects[i] = self.client.documents.get(int(documents[i]))
             page_total += doc_objects[i].page_count
-
         avg_page_cnt = round(page_total/doc_selected, 2)
 
         with open("average_page_count.csv", "w+") as file_:
