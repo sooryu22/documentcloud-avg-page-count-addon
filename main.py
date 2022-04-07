@@ -36,8 +36,10 @@ class AvgPageCount(AddOn):
         doc_selected = len(documents)
         page_total = 0
 
-        min_page = self.client.documents.get(int(documents[0])).page_count
-        max_page = self.client.documents.get(int(documents[0])).page_count
+        min_page_count = self.client.documents.get(
+            int(documents[0])).page_count
+        max_page_count = self.client.documents.get(
+            int(documents[0])).page_count
         min_page_doc = self.client.documents.get(int(documents[0]))
         max_page_doc = self.client.documents.get(int(documents[0]))
 
@@ -46,26 +48,31 @@ class AvgPageCount(AddOn):
             doc_objects[i] = self.client.documents.get(int(documents[i]))
 
             page_total += doc_objects[i].page_count
-            if doc_objects[i].page_count < min_page:
-                min_page = doc_objects[i].page_count
+            if doc_objects[i].page_count < min_page_count:
+                min_page_count = doc_objects[i].page_count
                 min_page_doc = doc_objects[i]
-            if doc_objects[i].page_count > max_page:
-                max_page = doc_objects[i].page_count
+            if doc_objects[i].page_count > max_page_count:
+                max_page_count = doc_objects[i].page_count
                 max_page_doc = doc_objects[i]
+
         avg_page_cnt = round(page_total/doc_selected, 2)
 
         with open("avg_page_count_for_"+str(doc_selected)+"_docs"+".csv", "w+") as file_:
             field_names = ['total_page',
-                           'average_page_count', 'min_page', 'max_page']
+                           'average_page_count', 'min_page_count', 'min_page_url', 'max_page_count', 'max_page_url']
             writer = csv.DictWriter(file_, fieldnames=field_names)
 
             writer.writeheader()
             writer.writerow({'total_page': page_total,
                             'average_page_count': avg_page_cnt,
-                             'min_page': min_page_doc.pdf_url,
-                             'max_page': max_page_doc.pdf_url})
+                             'min_page_count': min_page_count,
+                             'min_page_url': min_page_doc.pdf_url,
+                             'max_page_count': max_page_count,
+                             'max_page_url': max_page_doc.pdf_url})
 
             self.upload_file(file_)
+
+        self.set_message("Average page count end!")
 
 
 if __name__ == "__main__":
