@@ -7,6 +7,7 @@ from DocumentCloud via the request dispatch and writes data back to
 DocumentCloud using the standard API
 """
 
+import sys
 from documentcloud.addon import AddOn
 import csv
 
@@ -17,11 +18,18 @@ class AvgPageCount(AddOn):
     def main(self):
 
         documents = self.data.get("documents")
+        for document in documents:
+            try:
+                int(document)
+            except:
+                sys.exit("Please only input an integer")
+
         doc_objects = [0]*len(documents)
         doc_selected = len(documents)
         page_total = 0
 
         for i in range(doc_selected):
+
             doc_objects[i] = self.client.documents.get(int(documents[i]))
             page_total += doc_objects[i].page_count
         avg_page_cnt = round(page_total/doc_selected, 2)
