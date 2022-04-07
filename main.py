@@ -8,31 +8,34 @@ DocumentCloud using the standard API
 """
 
 from documentcloud.addon import AddOn
-from addon import AddOn
 import csv
 
 
 class AvgPageCount(AddOn):
-    """An example Add-On for DocumentCloud."""
+    """An Average Page Count Add-On for DocumentCloud."""
 
     def main(self):
-        # fetch your add-on specific data
-        if not self.documents:
-            self.set_message("Please select at least one document")
-            return
 
-        with open("average_page_count.txt", "w+") as file_:
-            for document in self.client.documents.list(id__in=self.documents):
+        documents = self.data.get("documents")
+        doc_objects = [0]*len(documents)
+        doc_selected = len(documents)
+        page_total = 0
 
-                page_total = + document.page()
-            num_docs = self.documents.count()
-            avg_page = round(page_total/num_docs)
+        for i in range(doc_selected):
+            doc_objects[i] = self.client.documents.get(int(documents[i]))
+            page_total += doc_objects[i].page_count
 
-            file_.write("Average page number for " + num_docs +
-                        "documents is: " + avg_page)
+        avg_page_cnt = round(page_total/doc_selected, 2)
+
+        with open("average_page_count.csv", "w+") as file_:
+            field_names = ['total_page', 'average_page_count']
+            writer = csv.DictWriter(file_, fieldnames=field_names)
+
+            writer.writeheader()
+            writer.writerow({'total_page': page_total,
+                            'average_page_count': avg_page_cnt})
+
             self.upload_file(file_)
-
-        self.set_message("Average Page Count end!")
 
 
 if __name__ == "__main__":
