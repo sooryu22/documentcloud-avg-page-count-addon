@@ -10,7 +10,7 @@ DocumentCloud using the standard API
 import sys
 from documentcloud.addon import AddOn
 import csv
-
+import math
 
 class AvgPageCount(AddOn):
     """An Average Page Count Add-On for DocumentCloud."""
@@ -18,42 +18,30 @@ class AvgPageCount(AddOn):
     def main(self):
         """The main add-on functionality goes here."""
 
-        # get documents id array
-        documents = self.data.get("documents")
 
-        if not documents:
-            sys.exit("Please select at least one document")
-
-        for document in documents:
-            try:
-                int(document)
-            except:
-                sys.exit("Please only provide an integer form of document id")
-
+        if not self.documents:
+            self.set_message("Please select at least one document")
+            return
+        
+       
         self.set_message("Beginning average page count!")
 
-        doc_objects = [0]*len(documents)
-        doc_selected = len(documents)
+        doc_selected = len(self.documents)
         page_total = 0
+        min_page_count = float('inf')
+        max_page_count = 0
+        min_page_doc = None
+        max_page_doc = None
 
-        min_page_count = self.client.documents.get(
-            int(documents[0])).page_count
-        max_page_count = self.client.documents.get(
-            int(documents[0])).page_count
-        min_page_doc = self.client.documents.get(int(documents[0]))
-        max_page_doc = self.client.documents.get(int(documents[0]))
-
-        for i in range(doc_selected):
-
-            doc_objects[i] = self.client.documents.get(int(documents[i]))
-
-            page_total += doc_objects[i].page_count
-            if doc_objects[i].page_count < min_page_count:
-                min_page_count = doc_objects[i].page_count
-                min_page_doc = doc_objects[i]
-            if doc_objects[i].page_count > max_page_count:
-                max_page_count = doc_objects[i].page_count
-                max_page_doc = doc_objects[i]
+        for document in self.client.documents.list(id__in=self.documents):
+        
+            page_total += document.page_count
+            if document.page_count < min_page_count:
+                min_page_count = document.page_count
+                min_page_doc = document
+            if document.page_count > max_page_count:
+                max_page_count = document.page_count
+                max_page_doc = document
 
         avg_page_cnt = round(page_total/doc_selected, 2)
 
@@ -73,7 +61,6 @@ class AvgPageCount(AddOn):
             self.upload_file(file_)
 
         self.set_message("Average page count end!")
-
 
 if __name__ == "__main__":
     AvgPageCount().main()
