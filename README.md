@@ -1,9 +1,7 @@
 
-# DocumentCloud Add-On Example
+# DocumentCloud Add-On — Average Page Count
 
-This repository contains an example Add-On for DocumentCloud.  It is designed
-to be copied and modified to allow one to easily write Add-Ons to bring custom
-functionality to DocumentCloud.
+This DocumentCloud Add-On allows you to select multiple documents or projects, returning basic page count stats, such as total pages, average number of pages, and link the largest and small documents with their number of pages.
 
 ## Files
 
@@ -77,12 +75,6 @@ You can also pass in a list of document IDs (`--documents`), a search query
 (`--query`), and JSON parameters for your Add-On (`--data`) - be sure to
 properly quote your JSON at the command line.
 
-Example invocation:
-```
-python main.py --username "DC.USERNAME" --password "DC.PASSWORD" --data '{"documents": ["123", "456"]}'
-```
-
-
 ### main.py
 
 This is the file to edit to implement your Add-On specific functionality. You
@@ -94,6 +86,14 @@ demonstrates using many of these features.
 If you need to add more files, remember to instantiate the main Add-On class
 from a file called `main.py` - that is what the GitHub action will call with
 the Add-On parameters upon being dispatched.
+
+### testing
+
+
+Testing invocation:
+```
+python3 main.py --username "DC.USERNAME" --password "DC.PASSWORD" --data '{"documents": ["123123", "456456", "789789"]}'
+```
 
 ### config.yaml
 
