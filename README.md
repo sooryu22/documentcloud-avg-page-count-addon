@@ -79,16 +79,16 @@ properly quote your JSON at the command line.
 
 Example invocation:
 ```
-python main.py --documents 123 --data '{"name": "World"}'
+python main.py --username "USERNAME" --password "PASSWORD" --data '{"documents": ["123", "456"]}'
 ```
+
 
 ### main.py
 
-This is the file to edit to implement your Add-On specific functionality.  You
-should define a class which inherits from `AddOn` from `addon.py`.  Then you
+This is the file to edit to implement your Add-On specific functionality. You
 can instantiate a new instance and call the main method, which is the entry
 point for your Add-On logic.  You may access the data parsed by `AddOn` as well
-as using the helper methods defined there.  The `HelloWorld` example Add-On
+as using the helper methods defined there.  The `avg-page-count` Add-On
 demonstrates using many of these features.
 
 If you need to add more files, remember to instantiate the main Add-On class
