@@ -79,7 +79,7 @@ properly quote your JSON at the command line.
 
 Example invocation:
 ```
-python main.py --username "USERNAME" --password "PASSWORD" --data '{"documents": ["123", "456"]}'
+python main.py --username "DC.USERNAME" --password "DC.PASSWORD" --data '{"documents": ["123", "456"]}'
 ```
 
 
