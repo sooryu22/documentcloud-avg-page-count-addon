@@ -46,6 +46,11 @@ class AvgPageCount(AddOn):
                 max_page_doc = document
 
         avg_page_cnt = round(page_total/doc_selected, 2)
+        print("total_page", page_total)
+        print("average page count:", avg_page_cnt)
+        print("min_page_count", min_page_count)
+        print("max_page_url", max_page_doc.pdf_url)
+
 
         with open("avg_page_count_for_"+str(doc_selected)+"_docs"+".csv", "w+") as file_:
             field_names = ['total_page',
