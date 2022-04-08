@@ -33,6 +33,8 @@ class AvgPageCount(AddOn):
         min_page_doc = None
         max_page_doc = None
 
+        print("self.client.documents.list(id__in=self.documents):", self.client.documents.list(id__in=self.documents))
+
         for document in self.client.documents.list(id__in=self.documents):
         
             page_total += document.page_count
