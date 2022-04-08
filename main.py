@@ -44,28 +44,24 @@ class AvgPageCount(AddOn):
                 max_page_doc = document
 
         avg_page_cnt = round(page_total/doc_selected, 2)
-        print("total_page", page_total)
-        print("average page count:", avg_page_cnt)
-        print("min_page_count", min_page_count)
-        print("max_page_url", max_page_doc.pdf_url)
-
 
         with open("avg_page_count_for_"+str(doc_selected)+"_docs"+".csv", "w+") as file_:
             field_names = ['total_page',
-                           'average_page_count', 'min_page_count', 'min_page_url', 'max_page_count', 'max_page_url']
+                           'average_page_count', 'min_page_count', 'max_page_count', 'min_page_url', 'max_page_url']
             writer = csv.DictWriter(file_, fieldnames=field_names)
 
             writer.writeheader()
             writer.writerow({'total_page': page_total,
                             'average_page_count': avg_page_cnt,
                              'min_page_count': min_page_count,
-                             'min_page_url': min_page_doc.pdf_url,
                              'max_page_count': max_page_count,
+                             'min_page_url': min_page_doc.pdf_url,
                              'max_page_url': max_page_doc.pdf_url})
             print("csv document contents:")
+            # go to the beginning of the file
             file_.seek(0)
+            # print the file contents
             print(file_.read())
-            self.upload_file(file_)
 
         self.set_message("Average page count end!")
 
