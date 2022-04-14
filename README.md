@@ -89,8 +89,7 @@ the Add-On parameters upon being dispatched.
 
 ### testing
 
-
-Testing invocation:
+Example invocation:
 ```
 python3 main.py --username "DC.USERNAME" --password "DC.PASSWORD" --documents 12341234 34563456 56785678
 ```
