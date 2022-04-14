@@ -59,6 +59,7 @@ class AvgPageCount(AddOn):
             file_.seek(0)
             # print the file contents
             print(file_.read())
+            self.upload_file(file_)
 
         self.set_message("Average page count end!")
 
