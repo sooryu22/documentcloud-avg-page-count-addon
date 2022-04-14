@@ -1,7 +1,7 @@
 # The title is the title of your Add-On
-title: Hello World
+title: Average Page Count
 # The description will be shown above the form when activating the Add-On
-description: This is an updated simple test add-on
+description: This is an add-on that returns total pages, average number of pages, and link the largest and small document with their number of pages for a given selection of documents
 # Type should always be object
 type: object
 # How does this add-on accept documents
