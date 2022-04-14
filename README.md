@@ -93,7 +93,6 @@ the Add-On parameters upon being dispatched.
 Testing invocation:
 ```
 python3 main.py --username "DC.USERNAME" --password "DC.PASSWORD" --documents 12341234 34563456 56785678
-
 ```
 
 ### config.yaml
