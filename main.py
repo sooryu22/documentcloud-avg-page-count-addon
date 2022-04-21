@@ -53,9 +53,7 @@ class AvgPageCount(AddOn):
                              'max_page_count': max_page_count,
                              'min_page_url': min_page_doc.pdf_url,
                              'max_page_url': max_page_doc.pdf_url})
-
             self.upload_file(file_)
-
         self.set_message("Average page count end!")
 
 
