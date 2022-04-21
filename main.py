@@ -31,7 +31,6 @@ class AvgPageCount(AddOn):
         max_page_doc = None
 
         for document in self.client.documents.list(id__in=self.documents):
-
             page_total += document.page_count
             if document.page_count < min_page_count:
                 min_page_count = document.page_count
@@ -54,11 +53,7 @@ class AvgPageCount(AddOn):
                              'max_page_count': max_page_count,
                              'min_page_url': min_page_doc.pdf_url,
                              'max_page_url': max_page_doc.pdf_url})
-            print("csv document contents:")
-            # go to the beginning of the file
-            file_.seek(0)
-            # print the file contents
-            print(file_.read())
+
             self.upload_file(file_)
 
         self.set_message("Average page count end!")
