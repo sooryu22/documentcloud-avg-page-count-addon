@@ -21,7 +21,7 @@ the Add-On parameters upon being dispatched.
 
 Example invocation:
 ```
-python3 main.py --username "DC.USERNAME" --password "DC.PASSWORD" --documents 12341234 34563456 56785678
+python main.py --username "DC.USERNAME" --password "DC.PASSWORD" --documents 12341234 34563456 56785678
 ```
 
 ### config.yaml
@@ -34,11 +34,16 @@ the basics to get started:
 
 ```yaml
 # The title is the title of your Add-On
-title: Hello World
+title: Average Page Count
 # The description will be shown above the form when activating the Add-On
-description: This is an updated simple test add-on
+description: This will return a csv file containinng total pages, average number of pages, and link the largest and small document with their number of pages for a given selection of documents.
 # Type should always be object
 type: object
+# How does this add-on accept documents
+# If more than one type is specified, the user will be prompted to choose one
+documents:
+  # By the currently selected documents
+  - selected
 # Properties are the fields for your form
 properties: {}
 ```
