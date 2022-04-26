@@ -18,6 +18,7 @@ class AvgPageCount(AddOn):
         """The main add-on functionality goes here."""
 
         if not self.documents:
+            print("not documents")
             self.set_message("Please select at least one document")
             return
 
