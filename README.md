@@ -1,5 +1,5 @@
 
-# DocumentCloud Add-On — Document Page Statistics
+# DocumentCloud Add-On — Page Statistics
 
 This DocumentCloud Add-On allows you to select multiple documents or projects, returning basic page count stats, such as total pages, average number of pages, and link the largest and small documents with their number of pages.
 
