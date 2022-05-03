@@ -28,7 +28,7 @@ class AvgPageCount(AddOn):
 
         doc_selected = len(self.documents)
         page_total = 0
-        min_page_count = float('inf')
+        min_page_count = float("inf")
         max_page_count = 0
         min_page_doc = None
         max_page_doc = None
@@ -42,20 +42,32 @@ class AvgPageCount(AddOn):
                 max_page_count = document.page_count
                 max_page_doc = document
 
-        avg_page_cnt = round(page_total/doc_selected, 2)
+        avg_page_cnt = round(page_total / doc_selected, 2)
 
-        with open("page_stats_for_"+str(doc_selected)+"_docs"+".csv", "w+") as file_:
-            field_names = ['total_page',
-                           'average_page_count', 'min_page_count', 'max_page_count', 'min_page_url', 'max_page_url']
+        with open(
+            "page_stats_for_" + str(doc_selected) + "_docs" + ".csv", "w+"
+        ) as file_:
+            field_names = [
+                "total_page",
+                "average_page_count",
+                "min_page_count",
+                "max_page_count",
+                "min_page_url",
+                "max_page_url",
+            ]
             writer = csv.DictWriter(file_, fieldnames=field_names)
 
             writer.writeheader()
-            writer.writerow({'total_page': page_total,
-                            'average_page_count': avg_page_cnt,
-                             'min_page_count': min_page_count,
-                             'max_page_count': max_page_count,
-                             'min_page_url': min_page_doc.pdf_url,
-                             'max_page_url': max_page_doc.pdf_url})
+            writer.writerow(
+                {
+                    "total_page": page_total,
+                    "average_page_count": avg_page_cnt,
+                    "min_page_count": min_page_count,
+                    "max_page_count": max_page_count,
+                    "min_page_url": min_page_doc.pdf_url,
+                    "max_page_url": max_page_doc.pdf_url,
+                }
+            )
             self.upload_file(file_)
         self.set_message("Page stats end!")
 
