@@ -7,15 +7,7 @@ This DocumentCloud Add-On allows you to select multiple documents or projects, r
 
 ### main.py
 
-This is the file to edit to implement your Add-On specific functionality. You
-can instantiate a new instance and call the main method, which is the entry
-point for your Add-On logic.  You may access the data parsed by `AddOn` as well
-as using the helper methods defined there.  The `avg-page-count` Add-On
-demonstrates using many of these features.
-
-If you need to add more files, remember to instantiate the main Add-On class
-from a file called `main.py` - that is what the GitHub action will call with
-the Add-On parameters upon being dispatched.
+This is the file that implements the `avg-page-count` Add-On specific functionality.
 
 ### testing
 
