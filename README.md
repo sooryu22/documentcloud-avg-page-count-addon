@@ -7,7 +7,7 @@ This DocumentCloud Add-On allows you to select multiple documents or projects, r
 
 ### main.py
 
-This is the file that implements the `avg-page-count` Add-On specific functionality.
+This is the file that implements the `page-stats` Add-On specific functionality.
 
 ### testing
 
@@ -18,7 +18,7 @@ python main.py --username "DC.USERNAME" --password "DC.PASSWORD" --documents 123
 
 ### config.yaml
 
-This is a YAML file which defines the data the `avg-page-count` Add-On expects to receive.
+This is a YAML file which defines the data the `page-stats` Add-On expects to receive.
 DocumentCloud will use it to show a corresponding form with the proper fields.
 It uses the [JSON Schema](https://json-schema.org/) format, but allows you to
 use YAML for convenience.  

@@ -13,7 +13,7 @@ from documentcloud.addon import AddOn
 import csv
 
 
-class AvgPageCount(AddOn):
+class PageStats(AddOn):
     """A Page Stats Add-On for DocumentCloud."""
 
     def main(self):
@@ -73,4 +73,4 @@ class AvgPageCount(AddOn):
 
 
 if __name__ == "__main__":
-    AvgPageCount().main()
+    PageStats().main()
